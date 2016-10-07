@@ -1,4 +1,4 @@
-package main
+package animals
 
 func RabbitFeed() string {
   return "Carrot"
