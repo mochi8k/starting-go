@@ -22,8 +22,8 @@ func main() {
 	fmt.Println(j, k, l)
 
 	m := 3.14
-	n := int(m) // n == 3
+	n := int(m) // == 3
 	o := -3.14
-	p := int(o) // n== -3
+	p := int(o) // == -3
 	fmt.Println(m, n, o, p)
 }
