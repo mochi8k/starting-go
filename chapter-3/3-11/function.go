@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 )
 
@@ -20,6 +21,30 @@ func div(a, b int) (int, int) {
 	return q, r
 }
 
+/*
+  エラーを返す
+*/
+func errFn() (int, error) {
+	return 1, errors.New("fact: domain error")
+}
+
+/*
+  戻り値を表す変数を持つ
+*/
+func fn1() (a int) {
+	return // a == 0
+}
+
+func fn2() int {
+	var a int
+	return a // a == 0
+}
+
+func fn3() (x, y int) {
+	y = 5
+	return // x == 0, y == 5
+}
+
 func main() {
 	fmt.Println(plus(1, 5)) // => 6
 
@@ -32,4 +57,15 @@ func main() {
 	// _, _ := div(19, 7) // 代入するとコンパイルエラー
 	_, _ = div(19, 7)
 	div(19, 7)
+
+	/*
+	   エラー処理
+	*/
+	result, err := errFn()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(result)
+	}
+
 }
