@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	Println = "hello" // fmt.Printlnと重複するためエラー
+// Println = "hello" // fmt.Printlnと重複するためエラー
 )
 
 func main() {
