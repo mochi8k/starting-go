@@ -47,12 +47,23 @@ func main() {
 	}
 
 	/* 範囲節によるfor */
+
+	/* 配列型とrange */
 	fruits := [3]string{"Apple", "Banana", "Cherry"}
 	for i, v := range fruits {
 
 		// i: インデックス
-		// v: 値
+		// v: 値(配列の要素の型)
 
-		fmt.Println(i, v)
 	}
+
+	/* 文字列型とrange */
+	for i, v := range "ABC" {
+
+		// i: インデックス
+		//    (コードポイントが開始されるバイト列のインデックス)
+		// v: 値(rune型)
+
+	}
+
 }
