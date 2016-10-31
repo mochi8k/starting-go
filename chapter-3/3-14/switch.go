@@ -53,9 +53,9 @@ func main() {
 
 	/* 第二引数までを代入した場合はエラーが発生しない. */
 	var x2 interface{} = 3.14
-	i2, isInt := x2.(int) // i2 == 0, isInt == false
+	i2, isInt := x2.(int)         // i2 == 0, isInt == false
 	f2, isFloat64 := x2.(float64) // f2 == 3.14, isFloat64 == true
-	s, isString := x2.(string) // s == "", isString == false
+	s, isString := x2.(string)    // s == "", isString == false
 
 	var x3 interface{} = "hello"
 	if x3 == nil {
@@ -66,5 +66,18 @@ func main() {
 		// dosomething
 	} else {
 		// dosomething
+	}
+
+	/* 型によるswitch */
+	var x4 interface{} = true
+	switch v := x4.(type) {
+	case bool:
+		f.Println("bool")
+	case int, uint:
+		f.Println("integer or unsigned intefer")
+	case string:
+		f.Println("string")
+	default:
+		f.Println("don't know")
 	}
 }
