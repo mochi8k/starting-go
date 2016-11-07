@@ -55,44 +55,74 @@ func scene2() {
 
 func scene3() {
 
-  /* 「異なる構造体型に共通の性質を持たせる」構造体 */
-  type Base struct {
-    Id int
-    Owner string
+	/* 「異なる構造体型に共通の性質を持たせる」構造体 */
+	type Base struct {
+		Id    int
+		Owner string
+	}
+
+	type A struct {
+		Base /* 共通のフィールド */
+		Name string
+		Area string
+	}
+
+	type B struct {
+		Base   /* 共通のフィールド */
+		Title  string
+		Bodies []string
+	}
+
+	a := A{
+		Base: Base{17, "Taro"},
+		Name: "Taro",
+		Area: "Tokyo",
+	}
+
+	b := B{
+		Base:   Base{81, "Hanako"},
+		Title:  "no title",
+		Bodies: []string{"A", "B"},
+	}
+
+	f.Println(a.Id)    // == 17
+	f.Println(a.Owner) // == "Taro"
+	f.Println(b.Id)    // == 81
+	f.Println(b.Owner) // == "Hanako"
+}
+
+/* 暗黙的なフィールドの注意点 */
+func scene4() {
+	/*
+	  ポインタ型の就職しやパッケージのプリフィックス部分は無視され、
+	  純粋な型名の部分が暗黙的なフィールド名となる.
+	*/
+	struct {
+	  T1    // フィールド名はT1
+	  *T2   // フィールド名はT2
+	  P.T3  // フィールド名はT3
+	  *P.T4 // フィールド名はT4
+	}
+}
+
+/* 再帰的な定義の禁止 */
+func scene5() {
+  /* 構造体のフィールドに自信の型を含むような再帰的な定義はコンパイルエラー */
+  type T struct {
+    T // コンパイルエラー
   }
 
-  type A struct {
-    Base /* 共通のフィールド */
-    Name string
-    Area string
+  type T0 struct {
+    T1 // T1がT0を含むのでコンパイルエラー
   }
 
-  type B struct {
-    Base /* 共通のフィールド */
-    Title string
-    Bodies []string
+  type T1 struct {
+    T0
   }
-
-  a := A{
-    Base: Base{17, "Taro"},
-    Name: "Taro",
-    Area: "Tokyo",
-  }
-
-  b := B{
-    Base: Base{81, "Hanako"},
-    Title: "no title",
-    Bodies: []string{"A", "B"},
-  }
-
-  f.Println(a.Id) // == 17
-  f.Println(a.Owner) // == "Taro"
-  f.Println(b.Id) // == 81
-  f.Println(b.Owner) // == "Hanako"
 }
 
 func main() {
 	scene1()
 	scene2()
-  scene3()
+	scene3()
 }
